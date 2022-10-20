@@ -1,0 +1,61 @@
+﻿{
+  "ticker": "MSFT",
+  "queryCount": 5,
+  "resultsCount": 5,
+  "adjusted": true,
+  "results": [
+    {
+      "v": 2.0239886e+07, "The trading volume of the symbol in the given time period."
+      "vw": 247.8246, "The volume weighted average price."
+      "o": 247.93, "The open price for the symbol in the given time period."
+      "c": 246.79, The close price for the symbol in the given time period.
+      "h": 250.34 "The highest price for the symbol in the given time period.",
+      "l": 246.08, "The lowest price for the symbol in the given time period."
+      "t": 1665028800000, "The Unix Msec timestamp for the start of the aggregate window."
+      "n": 248352 "The number of transactions in the aggregate window."
+    },
+    {
+      "v": 3.7737102e+07,
+      "vw": 235.5773,
+      "o": 240.902,
+      "c": 234.24,
+      "h": 241.32,
+      "l": 233.17,
+      "t": 1665115200000,
+      "n": 434172
+    },
+    {
+      "v": 2.9743608e+07,
+      "vw": 229.7802,
+      "o": 233.05,
+      "c": 229.25,
+      "h": 234.559,
+      "l": 226.73,
+      "t": 1665374400000,
+      "n": 379327
+    },
+    {
+      "v": 3.0473954e+07,
+      "vw": 226.3341,
+      "o": 227.62,
+      "c": 225.41,
+      "h": 229.06,
+      "l": 224.11,
+      "t": 1665460800000,
+      "n": 349682
+    },
+    {
+      "v": 2.1903937e+07,
+      "vw": 225.9151,
+      "o": 225.4,
+      "c": 225.75,
+      "h": 227.86,
+      "l": 223.96,
+      "t": 1665547200000,
+      "n": 260518
+    }
+  ],
+  "status": "DELAYED",
+  "request_id": "9a7fb9fa8ba34d340d61d7f384422ad4",
+  "count": 5
+}
