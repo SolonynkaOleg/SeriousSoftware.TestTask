@@ -1,6 +1,6 @@
-﻿using SeriousSoftware.TestTask.Storage.Models;
+﻿using SeriousSoftware.Data.Models;
 
-namespace SeriousSoftware.TestTask.Storage.Repositories
+namespace SeriousSoftware.Data.Repositories
 {
     public class StockPriceRepository : IStockPriceRepository
     {

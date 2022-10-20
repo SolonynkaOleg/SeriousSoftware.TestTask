@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SeriousSoftware.TestTask
+namespace SeriousSoftware.Services.ExternalAPIs
 {
     public class PolygonDataResponse
     {

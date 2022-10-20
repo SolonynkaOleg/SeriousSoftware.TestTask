@@ -1,7 +1,7 @@
-﻿using SeriousSoftware.TestTask.Storage.Models;
+﻿using SeriousSoftware.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace SeriousSoftware.TestTask.Storage
+namespace SeriousSoftware.Data
 {
     public class StocksInMemoryDbContext : DbContext
     {

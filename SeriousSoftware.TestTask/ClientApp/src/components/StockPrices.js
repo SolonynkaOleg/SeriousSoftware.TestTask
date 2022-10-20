@@ -1,76 +1,74 @@
-﻿import React, { Component } from 'react';
+﻿import React, { useState } from 'react';
 import { TypeChooser } from "react-stockcharts/lib/helper";
 import Chart from './Chart';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { loadStockPrices, calculatePerformance, storeStockPrices } from '../services/stockPriceService.js';
 
-export class StockPrices extends Component {
-    static displayName = StockPrices.name;
+export const StockPrices = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = { prices: [], value: "", loading: true };
+    const [prices, setPrices] = useState([]);
+    const [value, setValue] = useState("MSFT");
+    const [isLoading, setIsLoading] = useState(true);
+    const [startDate, setStartDate] = useState(new Date().setDate(new Date().getDate() - 7));
+    const [endDate, setEndDate] = useState(new Date());
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
     }
 
-    handleChange(event) {
-        this.setState({ value: event.target.value });
+    const loadPrices = async () => {
+        const prices = await loadStockPrices(value, startDate, endDate);
+        setPrices(prices);
+        setIsLoading(false);
     }
 
-    loadPrices() {
-        this.populateWeatherData(this.state.value);
+    const calculate = async () => {
+        await calculatePerformance(value, startDate, endDate);
+        setIsLoading(false);
     }
 
-    calculate() {
-        this.calculatePerformance(this.state.value);
+    const store = async () => {
+        await storeStockPrices(value, startDate, endDate);
     }
 
-    render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : <TypeChooser>
-                {type => <Chart type={type} data={this.state.prices} />}
-              </TypeChooser>;
+    return (
+        <div>
+            <h1 id="tabelLabel" >Stock Prices</h1>
+            <p>Sorry, had no time for styling</p>
+            <ul>
+                <li>You can select date range and stock which will be shown on the chart.</li>
+                <li>Performance Calculation api is present(with one unit test), but the data is never shown.</li>
+                <li>To compare performance of two stock I would make two api calls and show on the same chart,
+                    but it would require more time because there is no such simple example for the react charts library that I used.</li>
+                <li>Storing into database is implemented, but the data is never retrieved</li>
 
-        return (
-            <div>
-                <h1 id="tabelLabel" >Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server.</p>
-               
-                <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
-                <input type="button" value="Load prices" onClick={this.loadPrices.bind(this)} />
-                <input type="button" value="Calculate performance" onClick={this.calculate.bind(this)} />
-                {contents}
-            </div>
-        );
-    }
+                <li>This test project is a mix of "something here, something there".
+                    In order to implement it with better UI, with proper displaying stock data and it's performance,
+                    saving data and so on it would require more time than 4-8 hours. Especially when you need to write everything from scratch.</li>
+            </ul>
+            
+            
+            <p>Select date range and stock</p>
 
-    async populateWeatherData(value) {
-        const response = await fetch(`weatherforecast/GetPolygonStockData/${value}`);
-        const data = await response.json();
-        const prices = data.polygonResults.map(r => ({
-            date: new Date(r.timeStamp),
-            open: r.open,
-            high: r.high,
-            low: r.low,
-            close: r.close,
-            volume: r.volume
-        }));
+            <h6>From:</h6>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
 
-        this.setState({ prices: prices, loading: false });
-    }
+            <h6>To:</h6>
+            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
 
-    async calculatePerformance(value) {
+            <h6>Stock</h6>
+            <input type="text" value={value} onChange={(value) => handleChange(value)} />
+            <input type="button" value="Load prices" onClick={loadPrices} />
+            <input type="button" value="Calculate performance" onClick={calculate} />
+            <input type="button" value="Store" onClick={store} />
 
-    }
+            {isLoading ? <p><em>Loading...</em></p>
+                : <TypeChooser>
+                    {type => <Chart type={type} data={prices} />}
+                </TypeChooser>
+            }
 
-    parseData(parse) {
-        return function (d) {
-            d.date = parse(d.date);
-            d.open = +d.open;
-            d.high = +d.high;
-            d.low = +d.low;
-            d.close = +d.close;
-            d.volume = +d.volume;
-
-            return d;
-        };
-    }
+        </div>
+    );
 }

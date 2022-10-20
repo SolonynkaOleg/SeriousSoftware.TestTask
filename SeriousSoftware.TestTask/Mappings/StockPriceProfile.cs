@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using SeriousSoftware.TestTask.Storage.Models;
+using SeriousSoftware.Data.Models;
+using SeriousSoftware.Services.ExternalAPIs;
 
-namespace SeriousSoftware.TestTask.Mappings
+namespace SeriousSoftware.WepApi.Mappings
 {
     public class StockPriceProfile : Profile
     {

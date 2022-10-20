@@ -1,7 +1,8 @@
-﻿namespace SeriousSoftware.TestTask.Storage.Models
+﻿namespace SeriousSoftware.Data.Models
 {
     public class StockPrice
     {
+        public int Id { get; set; }
         /// <summary>
         /// The trading volume of the symbol in the given time period.
         /// </summary>
